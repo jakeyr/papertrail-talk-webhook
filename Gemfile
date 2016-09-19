@@ -1,13 +1,8 @@
 source :rubygems
-
-gem 'sinatra'
+ruby "2.3.1"
+gem 'sinatra', '1.1.0'
+gem 'yajl'
 gem 'yajl-ruby'
-gem 'prowly'
-gem 'activesupport', '~> 2.3', :require => 'active_support'
-
-gem 'thin'
-
-group :development do
-  gem 'heroku'
-  gem 'foreman'
-end
+gem 'activesupport'
+gem "iconv", "~> 1.0.3"
+gem 'unirest'

@@ -5,9 +5,12 @@ unless $LOAD_PATH.include? "."
   $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
 end
 
+$stdout.sync = true
+
 require 'bundler'
 Bundler.require :default
 
 require 'app'
 
-run PapertrailProwlWebhook::App.new
+run PapertrailSpeakWebhook::App.new
+

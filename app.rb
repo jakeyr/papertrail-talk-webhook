@@ -1,8 +1,12 @@
 require 'yajl'
+require "net/http"
+require 'net/https'
+require "uri"
 require 'active_support'
-require 'prowly'
 
-module PapertrailProwlWebhook
+SPEAK_URL = ENV['SPEAK_URL'] || "http://localhost:7388/speak"
+
+module PapertrailSpeakWebhook
   class App < Sinatra::Base
     get '/' do
       "200\n"
@@ -11,16 +15,13 @@ module PapertrailProwlWebhook
     post '/submit' do
       payload = HashWithIndifferentAccess.new(Yajl::Parser.parse(params[:payload]))
 
-      payload[:events].each do |event|
-        Prowly.notify do |n|
-          n.apikey      = ENV['PROWL_API_KEY']
-          n.priority    = Prowly::Notification::Priority::NORMAL
-          n.application = 'Papertrail'
-          n.event       = event[:hostname]
-          n.description = event[:message]
-          n.url         = "#{payload[:saved_search][:html_search_url]}?center_on_id=#{event[:id]}"
-        end
-      end
+      puts "Request going to #{SPEAK_URL}"
+
+      response = Unirest.post SPEAK_URL, 
+                        headers:{ "Content-Type" => "application/json" }, 
+                        parameters: {message: 'New A M S loan boarded.'}.to_json
+
+      puts response.body
 
       'ok'
     end

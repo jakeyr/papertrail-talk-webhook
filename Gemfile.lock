@@ -1,52 +1,38 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (2.3.14)
-    addressable (2.2.8)
-    daemons (1.1.8)
-    eventmachine (0.12.10)
-    excon (0.13.4)
-    foreman (0.46.0)
-      thor (>= 0.13.6)
-    heroku (2.26.0)
-      heroku-api (~> 0.2.0)
-      launchy (>= 0.3.2)
-      netrc (~> 0.7.2)
-      rest-client (~> 1.6.1)
-      rubyzip
-    heroku-api (0.2.0)
-      excon (~> 0.13.3)
-    launchy (2.1.0)
-      addressable (~> 2.2.6)
-    mime-types (1.18)
-    netrc (0.7.2)
-    prowly (0.3.0)
-    rack (1.4.1)
-    rack-protection (1.2.0)
-      rack
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
-    rubyzip (0.9.8)
-    sinatra (1.3.2)
-      rack (~> 1.3, >= 1.3.6)
-      rack-protection (~> 1.2)
-      tilt (~> 1.3, >= 1.3.3)
-    thin (1.3.1)
-      daemons (>= 1.0.9)
-      eventmachine (>= 0.12.6)
-      rack (>= 1.0.0)
-    thor (0.15.2)
-    tilt (1.3.3)
-    yajl-ruby (1.1.0)
+    activesupport (2.3.18)
+    addressable (2.3.8)
+    iconv (1.0.4)
+    json (1.8.3)
+    mime-types (1.25.1)
+    rack (1.6.4)
+    rest-client (1.6.9)
+      mime-types (~> 1.16)
+    sinatra (1.1.0)
+      rack (~> 1.1)
+      tilt (~> 1.1)
+    tilt (1.4.1)
+    unirest (1.1.2)
+      addressable (~> 2.3.5)
+      json (~> 1.8.1)
+      rest-client (~> 1.6.7)
+    yajl (0.3.4)
+    yajl-ruby (1.2.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport (~> 2.3)
-  foreman
-  heroku
-  prowly
-  sinatra
-  thin
+  activesupport
+  iconv (~> 1.0.3)
+  sinatra (= 1.1.0)
+  unirest
+  yajl
   yajl-ruby
+
+RUBY VERSION
+   ruby 2.3.1p112
+
+BUNDLED WITH
+   1.13.1
