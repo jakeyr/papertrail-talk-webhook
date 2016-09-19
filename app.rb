@@ -19,7 +19,7 @@ module PapertrailSpeakWebhook
 
       response = Unirest.post SPEAK_URL, 
                         headers:{ "Content-Type" => "application/json" }, 
-                        parameters: {message: 'New A M S loan boarded.'}.to_json
+                        parameters: {message: 'New A M S loan has been boarded.'}.to_json
 
       puts response.body
 
