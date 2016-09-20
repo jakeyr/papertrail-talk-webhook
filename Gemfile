@@ -6,3 +6,4 @@ gem 'yajl-ruby'
 gem 'activesupport'
 gem "iconv", "~> 1.0.3"
 gem 'unirest'
+gem 'pg'

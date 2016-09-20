@@ -6,6 +6,7 @@ GEM
     iconv (1.0.4)
     json (1.8.3)
     mime-types (1.25.1)
+    pg (0.18.4)
     rack (1.6.4)
     rest-client (1.6.9)
       mime-types (~> 1.16)
@@ -26,6 +27,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   iconv (~> 1.0.3)
+  pg
   sinatra (= 1.1.0)
   unirest
   yajl

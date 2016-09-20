@@ -3,6 +3,7 @@ require "net/http"
 require 'net/https'
 require "uri"
 require 'active_support'
+require 'pg'
 
 SPEAK_URL = ENV['SPEAK_URL'] || "http://localhost:7388/speak"
 
@@ -20,11 +21,6 @@ def play(url)
   }
 end
 
-$ACTION_MAP = {
-  13445233 => speak("New A M S loan has been boarded")
-  #13445233 => play("http://www.moviesoundclips.net/download.php?id=1628&ft=mp3")
-}
-
 module PapertrailSpeakWebhook
   class App < Sinatra::Base
     get '/' do
@@ -34,12 +30,22 @@ module PapertrailSpeakWebhook
     post '/submit' do
       payload = HashWithIndifferentAccess.new(Yajl::Parser.parse(params[:payload]))
 
+      uri = URI.parse(ENV['DATABASE_URL'])
+
+      conn = PG::Connection.open :host     => uri.host,
+                                 :user     => uri.user,
+                                 :password => uri.password,
+                                 :port     => uri.port || 5432,
+                                 :dbname   => uri.path[1..-1]
+
+      res = conn.exec_params('SELECT value,action FROM pt_id_map WHERE pt_id = $1', [payload['saved_search']['id']])
+
       puts "Request going to #{SPEAK_URL}"
 
       puts payload['saved_search']['id']
-      puts  $ACTION_MAP[payload['saved_search']['id']]
-      response = $ACTION_MAP[payload['saved_search']['id']].call()
 
+      response = send(res[0]['action'],res[0]['value']).call()
+      
       puts response.body
 
       'ok'
